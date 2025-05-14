@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create New Claim</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h3 class="text-center">Create New Constancy</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" role="form" th:action="@{/constancy/create}">
+                        <div class="form-group mb-3">
+                            <label for="constancyType">Constancy Type</label>
+                            <select id="constancyType" name="constancyType" class="form-control" required>
+                                <option th:each="constancyType : ${constancyTypes}"
+                                        th:value="${constancyType}"
+                                        th:text="${constancyType}">Constancy Type</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="event">Event</label>
+                            <select id="event" name="event" class="form-control" required>
+                                <option th:each="event : ${events}"
+                                        th:value="${event.getId()}"
+                                        th:text="${event.getTitle()}">Event</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="info">Information</label>
+                            <textarea  id="info" class="form-control" name="info" placeholder="Ingrese informacion" required></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Create Constancy</button>
+                            <a href="#" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+</script>
+</body>
+</html>

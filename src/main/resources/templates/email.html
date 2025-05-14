@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email</title>
+</head>
+<body style="font-family: arial, sans-serif">
+
+    <p style="font-size:11pt" th:text="${body}"></p>
+    <br>
+    <div>
+        <img width="420" height="135"
+             th:src="@{/images/utec-imagotipo.png}"
+             alt="UTEC">
+    </div>
+    <br>
+    <div style="font-size: x-small">
+        <i style="color:rgb(80,0,80)">
+            This e-mail and any attachment is confidential and is intended solely for the addressee(s).
+            If you are not intended recipient please inform the sender immediately, answering this e-mail and delete it as well as the attached files.
+            Any use, circulation or copy of this e-mail by any person or entity that is not the specific addressee(s) is prohibited.
+            UTEC is not responsible for any communication emitted without respecting our Information Security Policy and the Data Protection Act and Habeas Data Action No. 18.331.
+        </i>
+        <div>
+            <br>
+        </div>
+        <i style="color:rgb(34,34,34)">
+            Before printing this message, please check needed.
+            Protecting the environment is everyone's responsibility.
+        </i>
+    </div>
+
+</body>
+</html>
