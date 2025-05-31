@@ -1,8 +1,5 @@
 package edu.utec.webpft.dtos;
 
-import edu.utec.webpft.entidades.Departamento;
-import edu.utec.webpft.entidades.Itr;
-import edu.utec.webpft.entidades.Localidad;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -42,7 +40,7 @@ public class UsuarioDto {
     private String segundoApellido;
 
     @NotNull(message = "El documento no puede ser nulo")
-    private int documento;
+    private Integer documento;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;
@@ -51,7 +49,7 @@ public class UsuarioDto {
     private String correoPersonal;
 
     @NotNull(message = "El teléfono no puede ser nulo")
-    private int telefono;
+    private Integer telefono;
 
     @NotNull(message = "El departamento no puede ser nulo")
     private Long departamento;
@@ -69,7 +67,7 @@ public class UsuarioDto {
     private String genero;
 
     // Si el usuario es estudiante
-    private int generacion;
+    private Integer generacion;
 
     // Si el usuario es docente
     private String area;
@@ -78,7 +76,7 @@ public class UsuarioDto {
 
     private boolean activo;
 
-    private int edad;
+    private Integer edad;
 
 
     public UsuarioDto(Long id, String nombreUsuario, String contrasena, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, int documento, LocalDate fechaNacimiento, String correoPersonal, int telefono, Long departamento, Long localidad, String correoInstitucional, Long itr, boolean activo) {

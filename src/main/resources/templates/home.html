@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th=”http://www.thymeleaf.org” xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Inicio</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -14,18 +14,18 @@
     <style>
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Dos columnas */
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin: auto;
-            min-width: 1300px;/* Tamaño máximo */
+            min-width: 1300px;
         }
         .button-grid2 {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin: auto;
-            margin-top: -70px; /* Centrado horizontal */
-            min-width: 1300px; /* Mantén el tamaño como en la primera fila */
+            margin-top: -70px;
+            min-width: 1300px;
         }
 
         .button-item {
@@ -57,84 +57,86 @@
     <!-- Opciones para ADMIN -->
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/admin}">
-        Users List
+        Lista de Usuarios
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/admin/claim}">
-        Claims List
+        Lista de Reclamos
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/event/new}">
-        New Event
+        Nuevo Evento
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/event/list}">
-        Events List
+        Lista de Eventos
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/constancy/list}">
-        Constancies List
+        Lista de Constancias
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/attendances/attendancesAnalist}">
-        Register Attendance
-    </a>
-    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
-       class="button-item" th:href="@{/attendances/calls}">
-        Register Event Call
-    </a>
-    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
-       class="button-item" th:href="@{/admin/reports}">
-        Reports
+        Registrar Asistencia
     </a>
 
-    <!-- Opciones para TEACHER -->
+    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+       class="button-item" th:href="@{/attendances/calls}">
+        Registrar Convocatoria
+    </a>
+
+    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+       class="button-item" th:href="@{/admin/reports}">
+        Reportes
+    </a>
+
+    <!-- Opciones para DOCENTE -->
     <a th:if="${#authorization.expression('hasRole(''TEACHER'')')}"
        class="button-item" th:href="@{/user/update}">
-        Update
+        Actualizar Datos Personales
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''TEACHER'')')}"
        class="button-item" th:href="@{/event/mylist}">
-        My Events List
+        Mis Eventos
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''TEACHER'')')}"
        class="button-item" th:href="@{/attendances/attendancesTeacher}">
-        Register Attendance
+        Registrar Asistencia
     </a>
 
-
-    <!-- Opciones para STUDENT -->
+    <!-- Opciones para ESTUDIANTE -->
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/user/claim/new}">
-        New Claim
+        Nuevo Reclamo
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/user/claim/list}">
-        My Claims
+        Mis Reclamos
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/constancy/new}">
-        New Constancy
+        Nueva Constancia
     </a>
 </div>
+
 <div class="button-grid2">
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/constancy/myList}">
-        My Constancies
+        Mis Constancias
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/user/update}">
-        Update Personal Data
+        Actualizar Datos Personales
     </a>
 </div>
 

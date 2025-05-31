@@ -1,0 +1,52 @@
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0;
+
+}
+
+    .card-header {
+        background-color: #3b3838;
+        color: white;
+    }
+
+    .navbar {
+        background-color: #3b3838;
+        color: white;
+    }
+
+    .dropdown-menu {
+        background-color: #3b3838;
+        color: white;
+    }
+
+    .footer {
+        width: 100%;
+        background-color: #3b3838;
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+    }
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* En caso de contenido muy largo, permite desplazamiento */
+    margin: 0 auto; /* Centrar la tabla si hay espacio extra */
+}
+
+.table {
+    table-layout: fixed; /* Fija el layout para un mejor ajuste */
+    width: 100%; /* Usa todo el ancho disponible */
+    white-space: nowrap; /* Evita que el texto se divida */
+}
+
+.table th, .table td {
+    text-align: center; /* Alinear texto al centro */
+    vertical-align: middle; /* Centrar texto verticalmente */
+    overflow: hidden; /* Ocultar texto que exceda el ancho */
+    text-overflow: ellipsis; /* Agregar puntos suspensivos para texto largo */
+}

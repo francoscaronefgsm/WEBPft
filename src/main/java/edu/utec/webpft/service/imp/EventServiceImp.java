@@ -53,12 +53,19 @@ public class EventServiceImp implements EventService {
         eventDto.setFechaInicio(event.getFechaInicio());
         eventDto.setFechaFin(event.getFechaFin());
         eventDto.setItr(event.getItr().getId());
+        eventDto.setNombreItr(event.getItr().getNombre());
         eventDto.setUbicacion(event.getUbicacion());
+        eventDto.setDescripcionEstadoEvento(event.getEstadoEvento().getDescripcion());
+        eventDto.setDescripcionTipoEvento(event.getTipoEvento().getDescripcion());
+        eventDto.setDescripcionModalidad(event.getModalidad().getDescripcion());
         // Convertimos los objetos Tutor en IDs de teachers
         List<Long> teacherIds = event.getTutores().stream()
                 .map(Usuario::getId)
                 .collect(Collectors.toList());
         eventDto.setDocentes(teacherIds);
+        eventDto.setNombresDocentes(event.getTutores().stream()
+                .map(tutor -> tutor.getPrimerNombre() + " " + tutor.getPrimerApellido())
+                .collect(Collectors.joining(", ")));
         return eventDto;
     }
 

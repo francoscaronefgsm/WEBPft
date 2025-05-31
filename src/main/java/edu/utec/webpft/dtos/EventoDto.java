@@ -34,5 +34,11 @@ public class EventoDto {
     private String nombresDocentes;
 
     private String nombreItr;
+
+    private String descripcionTipoEvento;
+
+    private String descripcionModalidad;
+
+    private String descripcionEstadoEvento;
 }
 

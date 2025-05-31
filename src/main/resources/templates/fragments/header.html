@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th=”http://www.thymeleaf.org”
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Inicio</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -17,7 +17,7 @@
 <body>
 <nav th:fragment="header" class="navbar navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Welcome, <span sec:authentication="name"></span></a>
+        <a class="navbar-brand" href="#">Bienvenido, <span sec:authentication="name"></span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,85 +25,84 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/home}">Inicio</a>
                 </li>
                 <li class="nav-item dropdown" data-bs-theme="dark">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span sec:authorize="hasRole('ADMIN')" th:text="Administration"></span>
-                        <span sec:authorize="hasRole('TEACHER')" th:text="Teacher"></span>
-                        <span sec:authorize="hasRole('STUDENT')" th:text="Student"></span>
+                        <span sec:authorize="hasRole('ADMIN')" th:text="Administración"></span>
+                        <span sec:authorize="hasRole('TEACHER')" th:text="Profesor"></span>
+                        <span sec:authorize="hasRole('STUDENT')" th:text="Estudiante"></span>
                     </a>
                     <ul sec:authorize="hasRole('ADMIN')" class="dropdown-menu">
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/admin}" type="submit">Users List</a>
+                            <a class="btn-link nav-link" th:href="@{/admin}" type="submit">Lista de Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/admin/claim}" type="submit">Claims List</a>
+                            <a class="btn-link nav-link" th:href="@{/admin/claim}" type="submit">Lista de Reclamos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/event/new}" type="submit">New Event</a>
+                            <a class="btn-link nav-link" th:href="@{/event/new}" type="submit">Nuevo Evento</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/event/list}" type="submit">Events List</a>
+                            <a class="btn-link nav-link" th:href="@{/event/list}" type="submit">Lista de Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/constancy/list}" type="submit">Constancies List</a>
+                            <a class="btn-link nav-link" th:href="@{/constancy/list}" type="submit">Lista de Constancias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/attendances/calls}" type="submit">Register Event Call</a>
+                            <a class="btn-link nav-link" th:href="@{/attendances/calls}" type="submit">Registrar Llamada de Evento</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/attendances/attendancesAnalist}" type="submit">Register Attendance</a>
+                            <a class="btn-link nav-link" th:href="@{/attendances/attendancesAnalist}" type="submit">Registrar Asistencia</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/admin/reports}" type="submit">Reports</a>
+                            <a class="btn-link nav-link" th:href="@{/admin/reports}" type="submit">Informes</a>
                         </li>
                     </ul>
                     <ul sec:authorize="hasRole('TEACHER')" class="dropdown-menu">
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/user/update}" type="submit">Update</a>
+                            <a class="btn-link nav-link" th:href="@{/user/update}" type="submit">Actualizar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/event/mylist}" type="submit">My Events List</a>
+                            <a class="btn-link nav-link" th:href="@{/event/mylist}" type="submit">Mi Lista de Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/attendances/attendancesTeacher}" type="submit">Register Attendance</a>
+                            <a class="btn-link nav-link" th:href="@{/attendances/attendancesTeacher}" type="submit">Registrar Asistencia</a>
                         </li>
                         <li class="nav-item">
                             <form th:action="@{/user/dropout}" method="post" class="d-inline">
                                 <input type="hidden" name="id" th:value="${#authentication.getPrincipal().getUser().getId()}">
-                                <button type="submit" class="btn-link nav-link">Drop Out</button>
+                                <button type="submit" class="btn-link nav-link">Abandonar</button>
                             </form>
                         </li>
                     </ul>
-                    <!-- Opciones para STUDENT -->
                     <ul sec:authorize="hasRole('STUDENT')" class="dropdown-menu">
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/user/claim/new}" type="submit">New Claim</a>
+                            <a class="btn-link nav-link" th:href="@{/user/claim/new}" type="submit">Nuevo Reclamo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/user/claim/list}" type="submit">My Claims</a>
+                            <a class="btn-link nav-link" th:href="@{/user/claim/list}" type="submit">Mis Reclamos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/constancy/new}" type="submit">New Constancy</a>
+                            <a class="btn-link nav-link" th:href="@{/constancy/new}" type="submit">Nueva Constancia</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/constancy/myList}" type="submit">My Constancies</a>
+                            <a class="btn-link nav-link" th:href="@{/constancy/myList}" type="submit">Mis Constancias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/user/update}" type="submit">Update Personal Data</a>
+                            <a class="btn-link nav-link" th:href="@{/user/update}" type="submit">Actualizar Datos Personales</a>
                         </li>
                         <li class="nav-item">
                             <form th:action="@{/user/dropout}" method="post" class="d-inline">
                                 <input type="hidden" name="id" th:value="${#authentication.getPrincipal().getUser().getId()}">
-                                <button type="submit" class="btn-link nav-link">Drop Out</button>
+                                <button type="submit" class="btn-link nav-link">Abandonar</button>
                             </form>
                         </li>
                     </ul>
                 </li>
             </ul>
             <form method="post" th:action="@{/logout}" class="d-inline">
-                <input type="submit" value="Logout" class="btn btn-secondary">
+                <input type="submit" value="Cerrar Sesión" class="btn btn-secondary">
             </form>
         </div>
     </div>

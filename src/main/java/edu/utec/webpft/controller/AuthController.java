@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import com.fabdelgado.ciuy.*;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class AuthController {
     private final ItrService itrService;
 
     private final Constantes constantes = new Constantes();
+
+
 
     @GetMapping("/login")
     public String login(@RequestParam(value = "error", required = false) String error,
@@ -66,20 +69,28 @@ public class AuthController {
     public String register(@Valid @ModelAttribute("user") UsuarioDto user,
                            BindingResult result, Model model) {
 
+        Validator validator = new Validator();
+
         if(userService.existsByUsername(user.getNombreUsuario())) {
-            result.rejectValue("username", "error.user", "Username already in use");
+            result.rejectValue("nombreUsuario", "error.user", "Username already in use");
         }
 
         if(userService.existsByPersonalEmail(user.getCorreoPersonal())) {
-            result.rejectValue("personalEmail", "error.user", "Personal email already in use");
+            result.rejectValue("correoPersonal", "error.user", "Personal email already in use");
         }
 
         if(userService.existsByInstitutionalEmail(user.getCorreoInstitucional())) {
-            result.rejectValue("institutionalEmail", "error.user", "Institutional email already in use");
+            result.rejectValue("correoInstitucional", "error.user", "Institutional email already in use");
         }
 
-        if(userService.existsByDocument(user.getDocumento())) {
-            result.rejectValue("document", "error.user", "Document already in use");
+        if(user.getDocumento()!=null){
+            if(userService.existsByDocument(user.getDocumento())) {
+                result.rejectValue("documento", "error.user", "Document already in use");
+            }
+
+            if(!validator.validateCi(user.getDocumento())){
+                result.rejectValue("documento", "error.user", "El documento no es valido");
+            }
         }
 
         if(result.hasErrors()) {
@@ -87,6 +98,7 @@ public class AuthController {
             model.addAttribute("departments", departmentService.findAll());
             model.addAttribute("localities", localityService.findAll());
             model.addAttribute("itrs", itrService.findAll());
+            model.addAttribute("genders", constantes.getSexo());
             return "register";
         } else {
             userService.register(user);

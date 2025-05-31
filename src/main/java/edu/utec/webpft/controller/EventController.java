@@ -22,7 +22,6 @@ public class EventController {
 
     private final EventService eventService;
     private final UserService userService;
-    private final Constantes constantes = new Constantes();
     private final ItrService itrService;
     private final AuxiliaresService auxiliaresService;
 
@@ -60,23 +59,6 @@ public class EventController {
         List<ModalidadEventoDto> eventModes = auxiliaresService.obtenerModalidadesEvento();
         List<TipoEventoDto> eventTypes = auxiliaresService.obtenerTiposEvento();
         List<ItrDto> itrs = itrService.findAll();
-        for (EventoDto event : events) {
-            StringBuilder teacherNames = new StringBuilder(); // Lista para almacenar los nombres de los teachers
-
-            for (Long teacherId : event.getDocentes()) {
-                UsuarioDto user = userService.findUsuarioDtoById(teacherId);
-                if (user != null) {
-                    teacherNames.append(user.getPrimerNombre()).append(" ").append(user.getPrimerApellido()).append(" ; ");
-                }
-            }
-            if (!teacherNames.isEmpty()) {
-                teacherNames.setLength(teacherNames.length() - 2); // -2 para eliminar el último " ; "
-            }
-
-            event.setNombresDocentes(teacherNames.toString());
-            event.setNombreItr(itrService.findById(event.getItr()).getNombre());
-        }
-
 
 
         model.addAttribute("teachers", teachers);

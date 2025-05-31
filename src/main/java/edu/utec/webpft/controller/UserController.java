@@ -29,6 +29,8 @@ public class UserController {
 
     private final ItrService itrService;
 
+    private final AuxiliaresService auxiliaresService;
+
     @PostMapping("/dropout")
     public String dropout(@RequestParam Long id) {
         userService.changeUserStatus(id);
@@ -66,7 +68,9 @@ public class UserController {
     @GetMapping("/claim/new")
     public String showNewClaimForm(Model model) {
         ReclamoDto claimDto = new ReclamoDto();
+
         model.addAttribute("claim", claimDto);
+        model.addAttribute("tiposReclamo", auxiliaresService.obtenerTiposReclamo());
         return "claims/newClaim";  // Especificar la ruta correcta de la plantilla
     }
 
@@ -92,6 +96,7 @@ public class UserController {
 
         // Pasar la lista de reclamos a la vista
         model.addAttribute("claims", claims);
+        model.addAttribute("tiposReclamo", auxiliaresService.obtenerTiposReclamo());
 
         return "claims/listClaimStudent"; // La vista donde se mostrarán los reclamos
     }
@@ -101,7 +106,6 @@ public class UserController {
     @PostMapping("/claim/update")
     public String updateClaim(@ModelAttribute("claim") ReclamoDto claimDto) {
         claimDto.setActualizado(LocalDateTime.now());
-        claimDto.setEstadoReclamoDto(0l);
         claimService.update(claimDto.getId(),claimDto);
         return "redirect:/user/claim/list";
     }

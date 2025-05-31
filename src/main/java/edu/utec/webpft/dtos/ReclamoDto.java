@@ -33,5 +33,9 @@ public class ReclamoDto {
 
     private Long estadoReclamoDto;
 
+    private String descripcionEstadoReclamo;
+
+    private String descripcionTipoReclamo;
+
     private Long usuario;
 }

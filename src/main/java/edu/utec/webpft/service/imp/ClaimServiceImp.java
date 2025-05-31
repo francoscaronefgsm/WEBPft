@@ -32,7 +32,8 @@ public class ClaimServiceImp implements ClaimService {
         claimDto.setDocente(claim.getDocente());
         claimDto.setCreditos(claim.getCreditos());
         claimDto.setEstadoReclamoDto(claim.getEstadoReclamo().getId());
-
+        claimDto.setDescripcionEstadoReclamo(claim.getEstadoReclamo().getDescripcion());
+        claimDto.setDescripcionTipoReclamo(claim.getTipoReclamo().getDescripcion());
         claimDto.setUsuario(claim.getEstudiante().getId());
         return claimDto;
     }
@@ -45,7 +46,6 @@ public class ClaimServiceImp implements ClaimService {
         claim.setCreado(claimDto.getCreado());
         claim.setActualizado(claimDto.getActualizado());
         claim.setTipoReclamo(tipoReclamoRepository.getById(claimDto.getTipoReclamoDto()));
-
         claim.setSemestre(claimDto.getSemestre());
         claim.setFecha(claimDto.getFecha());
         claim.setDocente(claimDto.getDocente());
@@ -77,7 +77,6 @@ public class ClaimServiceImp implements ClaimService {
         claim.setFecha(claimDto.getFecha());
         claim.setDocente(claimDto.getDocente());
         claim.setCreditos(claimDto.getCreditos());
-        claim.setEstadoReclamo(estadoReclamoRepository.getById(claimDto.getEstadoReclamoDto()));
         return mapToDto(claimRepository.save(claim));
     }
 

@@ -43,6 +43,8 @@ public class WebPftApplication implements CommandLineRunner {
     private final EstadoEventoRepository estadoEventoRepository;
     private final TipoEventoRepository tipoEventoRepository;
     private final EstadoJustificacionRepository estadoJustificacionRepository;
+    private final TipoReclamoRepository tipoReclamoRepository;
+    private final EstadoReclamoRepository estadoReclamoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(WebPftApplication.class, args);
@@ -219,7 +221,7 @@ public class WebPftApplication implements CommandLineRunner {
                 .localidad(localityRepository.getById(907l))
                 .itr(itrFrayBentos)
                 .roles(Arrays.asList(studentRole))
-                .activo(false)
+                .activo(true)
                 .correoInstitucional("jorge.costa@estudiantes.utec.edu.uy")
                 .genero("Masculino")
                 .generacion(2023)
@@ -253,30 +255,72 @@ public class WebPftApplication implements CommandLineRunner {
         List<Usuario> teachers = new ArrayList<>();
         teachers.add(teacher);
 
+//        constancyTypes.add("Constancia de Transporte");
+//        constancyTypes.add("Constancias de Examen");
+//        constancyTypes.add("Constancia de prueba parcial");
+//        constancyTypes.add("Constancia de jornada externa");
+//
+//        constancyStatus.add("Ingresado");
+//        constancyStatus.add("En proceso");
+//        constancyStatus.add("Finalizado");
+
+
         ModalidadEvento modalidadEventoPresencial = ModalidadEvento.builder().descripcion("Presencial").activo(true).build();
         ModalidadEvento modalidadEventoVirtual = ModalidadEvento.builder().descripcion("Virtual").activo(true).build();
+        ModalidadEvento modalidadEventoSemipresencial = ModalidadEvento.builder().descripcion("Semipresencial").activo(true).build();
         List<ModalidadEvento> modalidades = new ArrayList<>();
         modalidades.add(modalidadEventoPresencial);
         modalidades.add(modalidadEventoVirtual);
+        modalidades.add(modalidadEventoSemipresencial);
         modalidadEventoRepository.saveAll(modalidades);
 
-        TipoEvento tipoEventoConvocatoria = TipoEvento.builder().descripcion("Convocatoria VME").activo(true).build();
-        TipoEvento tipoEventoActividadApe = TipoEvento.builder().descripcion("Activida APE").activo(true).build();
-        TipoEvento tipoEventoOptativa = TipoEvento.builder().descripcion("Optativa").activo(true).build();
+
+        TipoEvento tipoEventoJornadaPrescencial = TipoEvento.builder().descripcion("Jornada prescencial").activo(true).build();
+        TipoEvento tipoEventoExamen = TipoEvento.builder().descripcion("Examen").activo(true).build();
+        TipoEvento tipoEventoDefensaProyecto = TipoEvento.builder().descripcion("Defensa de proyecto").activo(true).build();
+        TipoEvento tipoEventoPruebaFinal = TipoEvento.builder().descripcion("Prueba final").activo(true).build();
+        TipoEvento tipoEventoVme = TipoEvento.builder().descripcion("Convocatoria VME").activo(true).build();
+        TipoEvento tipoEventoOptativa = TipoEvento.builder().descripcion("Convocatoria optativa").activo(true).build();
+        TipoEvento tipoEventoOtro = TipoEvento.builder().descripcion("Otro").activo(true).build();
         List<TipoEvento> tiposEvento = new ArrayList<>();
-        tiposEvento.add(tipoEventoConvocatoria);
-        tiposEvento.add(tipoEventoActividadApe);
+        tiposEvento.add(tipoEventoJornadaPrescencial);
+        tiposEvento.add(tipoEventoExamen);
+        tiposEvento.add(tipoEventoOptativa);
+        tiposEvento.add(tipoEventoVme);
+        tiposEvento.add(tipoEventoOtro);
+        tiposEvento.add(tipoEventoPruebaFinal);
+        tiposEvento.add(tipoEventoDefensaProyecto);
         tipoEventoRepository.saveAll(tiposEvento);
 
+        TipoReclamo tipoReclamoConvocatoria = TipoReclamo.builder().descripcion("Convocatoria VME").activo(true).build();
+        TipoReclamo tipoReclamoActividadApe = TipoReclamo.builder().descripcion("Actividad APE").activo(true).build();
+        TipoReclamo tipoReclamoOptativa = TipoReclamo.builder().descripcion("Optativa").activo(true).build();
+        List<TipoReclamo> tiposReclamo = new ArrayList<>();
+        tiposReclamo.add(tipoReclamoConvocatoria);
+        tiposReclamo.add(tipoReclamoActividadApe);
+        tiposReclamo.add(tipoReclamoOptativa);
+        tipoReclamoRepository.saveAll(tiposReclamo);
+
+        EstadoReclamo estadoPendienteReclamo = EstadoReclamo.builder().descripcion("Pendiente").build();
+        EstadoReclamo estadoEnProcesoReclamo = EstadoReclamo.builder().descripcion("En Proceso").build();
+        EstadoReclamo estadoFinalizadoReclamo = EstadoReclamo.builder().descripcion("Finalizado").build();
+        List<EstadoReclamo> estadosReclamo = new ArrayList<>();
+        estadosReclamo.add(estadoPendienteReclamo);
+        estadosReclamo.add(estadoEnProcesoReclamo);
+        estadosReclamo.add(estadoFinalizadoReclamo);
+        estadoReclamoRepository.saveAll(estadosReclamo);
+
         EstadoEvento estadoEventoCorriente = EstadoEvento.builder().descripcion("Corriente").activo(true).build();
+        EstadoEvento estadoEventoFinalizado = EstadoEvento.builder().descripcion("Finalizado").build();
         EstadoEvento estadoEventoFuturo = EstadoEvento.builder().descripcion("Futuro").activo(true).build();
         List<EstadoEvento> estadosEvento = new ArrayList<>();
         estadosEvento.add(estadoEventoCorriente);
+        estadosEvento.add(estadoEventoFinalizado);
         estadosEvento.add(estadoEventoFuturo);
         estadoEventoRepository.saveAll(estadosEvento);
 
-        Evento bantotal = Evento.builder().tipoEvento(tipoEventoConvocatoria).itr(itrFrayBentos).modalidad(modalidadEventoVirtual).ubicacion("Sala de Conferencias").fechaFin(LocalDateTime.of(2024, Month.DECEMBER, 17, 12, 0)).fechaInicio(LocalDateTime.of(2024, Month.DECEMBER, 17, 9, 0)).estadoEvento(estadoEventoCorriente).titulo("Bantotal").tutores(teachers).build();
-        Evento cigras =	Evento.builder().tipoEvento(tipoEventoActividadApe).itr(itrFrayBentos).modalidad(modalidadEventoPresencial).ubicacion("Virtual").fechaFin(LocalDateTime.of(2024, Month.DECEMBER, 25, 12, 0)).fechaInicio(LocalDateTime.of(2024, Month.DECEMBER, 17, 9, 0)).estadoEvento(estadoEventoFuturo).titulo("CIGRAS").tutores(teachers).build();
+        Evento bantotal = Evento.builder().tipoEvento(tipoEventoVme).itr(itrFrayBentos).modalidad(modalidadEventoVirtual).ubicacion("Sala de Conferencias").fechaFin(LocalDateTime.of(2024, Month.DECEMBER, 17, 12, 0)).fechaInicio(LocalDateTime.of(2024, Month.DECEMBER, 17, 9, 0)).estadoEvento(estadoEventoCorriente).titulo("Bantotal").tutores(teachers).build();
+        Evento cigras =	Evento.builder().tipoEvento(tipoEventoOptativa).itr(itrFrayBentos).modalidad(modalidadEventoPresencial).ubicacion("Virtual").fechaFin(LocalDateTime.of(2024, Month.DECEMBER, 25, 12, 0)).fechaInicio(LocalDateTime.of(2024, Month.DECEMBER, 17, 9, 0)).estadoEvento(estadoEventoFuturo).titulo("CIGRAS").tutores(teachers).build();
 
         List<Evento> events = Arrays.asList(bantotal,cigras);
         eventRepository.saveAll(events);

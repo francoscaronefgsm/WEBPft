@@ -1,167 +1,167 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register</title>
+    <title>Registro</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
 </head>
 <body>
 <div class="container mt-3 mb-3">
-    <div th:if="${param.fail}" class="alert alert-danger">Username or email already exists</div>
+    <div th:if="${param.fail}" class="alert alert-danger">Nombre de usuario o correo ya existe</div>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-header">
-                    <h3 class="text-center">Register</h3>
+                    <h3 class="text-center">Registro</h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" role="form" th:action="@{/register}" th:object="${user}">
+                    <form method="post" role="form" th:action="@{/register}" th:object="${user}" id="registrationForm">
                         <div class="form-group mb-3">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" class="form-control" name="username" th:field="*{username}">
+                            <label for="nombreUsuario">Nombre de usuario</label>
+                            <input type="text" id="nombreUsuario" class="form-control" name="nombreUsuario" th:field="*{nombreUsuario}">
                         </div>
-                        <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></p>
+                        <p th:if="${#fields.hasErrors('nombreUsuario')}" class="text-danger" th:errors="*{nombreUsuario}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" class="form-control" name="password" th:field="*{password}">
+                            <label for="contrasena">Contraseña</label>
+                            <input type="password" id="contrasena" class="form-control" name="contrasena" th:field="*{contrasena}">
                         </div>
-                        <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+                        <p th:if="${#fields.hasErrors('contrasena')}" class="text-danger" th:errors="*{contrasena}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" class="form-control" name="firstName" th:field="*{firstName}">
+                            <label for="primerNombre">Primer nombre</label>
+                            <input type="text" id="primerNombre" class="form-control" name="primerNombre" th:field="*{primerNombre}">
                         </div>
-                        <p th:if="${#fields.hasErrors('firstName')}" class="text-danger" th:errors="*{firstName}"></p>
+                        <p th:if="${#fields.hasErrors('primerNombre')}" class="text-danger" th:errors="*{primerNombre}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="secondName">Second Name</label>
-                            <input type="text" id="secondName" class="form-control" name="secondName" th:field="*{secondName}">
+                            <label for="segundoNombre">Segundo nombre</label>
+                            <input type="text" id="segundoNombre" class="form-control" name="segundoNombre" th:field="*{segundoNombre}">
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="firstSurname">First Surname</label>
-                            <input type="text" id="firstSurname" class="form-control" name="firstSurname" th:field="*{firstSurname}">
+                            <label for="primerApellido">Primer apellido</label>
+                            <input type="text" id="primerApellido" class="form-control" name="primerApellido" th:field="*{primerApellido}">
                         </div>
-                        <p th:if="${#fields.hasErrors('firstSurname')}" class="text-danger" th:errors="*{firstSurname}"></p>
+                        <p th:if="${#fields.hasErrors('primerApellido')}" class="text-danger" th:errors="*{primerApellido}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="secondSurname">Second Surname</label>
-                            <input type="text" id="secondSurname" class="form-control" name="secondSurname" th:field="*{secondSurname}">
+                            <label for="segundoApellido">Segundo apellido</label>
+                            <input type="text" id="segundoApellido" class="form-control" name="segundoApellido" th:field="*{segundoApellido}">
                         </div>
-                        <p th:if="${#fields.hasErrors('secondSurname')}" class="text-danger" th:errors="*{secondSurname}"></p>
+                        <p th:if="${#fields.hasErrors('segundoApellido')}" class="text-danger" th:errors="*{segundoApellido}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="gender">Gender</label>
-                            <select id="gender" name="gender" class="form-control" th:field="*{gender}" required>
-                                <option th:each="gender : ${genders}"
-                                        th:value="${gender}"
-                                        th:text="${gender}">Gender</option>
+                            <label for="genero">Género</label>
+                            <select id="genero" name="genero" class="form-control" th:field="*{genero}" required>
+                                <option th:each="genero : ${genders}"
+                                        th:value="${genero}"
+                                        th:text="${genero}">Género</option>
                             </select>
                         </div>
-                        <p th:if="${#fields.hasErrors('gender')}" class="text-danger" th:errors="*{gender}"></p>
+                        <p th:if="${#fields.hasErrors('genero')}" class="text-danger" th:errors="*{genero}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="document">Document</label>
-                            <input type="text" id="document" class="form-control" name="document" th:field="*{document}">
+                            <label for="documento">Documento</label>
+                            <input type="text" id="documento" class="form-control" minlength="7" maxlength="8" name="documento" th:field="*{documento}">
                         </div>
-                        <p th:if="${#fields.hasErrors('document')}" class="text-danger" th:errors="*{document}"></p>
+                        <p th:if="${#fields.hasErrors('documento')}" class="text-danger" th:errors="*{documento}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="birthDate">Birth Date</label>
-                            <input type="date" id="birthDate" class="form-control" name="birthDate" th:field="*{birthDate}">
+                            <label for="fechaNacimiento">Fecha de nacimiento</label>
+                            <input type="date" id="fechaNacimiento" class="form-control" name="fechaNacimiento" th:field="*{fechaNacimiento}">
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="personalEmail">Personal Email</label>
-                            <input type="email" id="personalEmail" class="form-control" name="personalEmail" th:field="*{personalEmail}">
+                            <label for="correoPersonal">Correo personal</label>
+                            <input type="email" id="correoPersonal" class="form-control" name="correoPersonal" th:field="*{correoPersonal}">
                         </div>
-                        <p th:if="${#fields.hasErrors('personalEmail')}" class="text-danger" th:errors="*{personalEmail}"></p>
+                        <p th:if="${#fields.hasErrors('correoPersonal')}" class="text-danger" th:errors="*{correoPersonal}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="phone">Phone</label>
-                            <input type="text" id="phone" class="form-control" name="phone" th:field="*{phone}">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" id="telefono" class="form-control" name="telefono" th:field="*{telefono}">
                         </div>
-                        <p th:if="${#fields.hasErrors('phone')}" class="text-danger" th:errors="*{phone}"></p>
+                        <p th:if="${#fields.hasErrors('telefono')}" class="text-danger" th:errors="*{telefono}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="department">Department</label>
-                            <select id="department" class="form-control" name="department" th:field="*{department}">
-                                <option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
+                            <label for="departamento">Departamento</label>
+                            <select id="departamento" class="form-control" name="departamento" th:field="*{departamento}">
+                                <option th:each="departamento : ${departments}" th:value="${departamento.id}" th:text="${departamento.nombre}"></option>
                             </select>
                         </div>
-                        <p th:if="${#fields.hasErrors('department')}" class="text-danger" th:errors="*{department}"></p>
+                        <p th:if="${#fields.hasErrors('departamento')}" class="text-danger" th:errors="*{departamento}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="locality">Locality</label>
-                            <select id="locality" class="form-control" name="locality" th:field="*{locality}">
+                            <label for="localidad">Localidad</label>
+                            <select id="localidad" class="form-control" name="localidad" th:field="*{localidad}">
                                 <!-- Las opciones se llenarán dinámicamente con JS -->
                             </select>
                         </div>
-                        <p th:if="${#fields.hasErrors('locality')}" class="text-danger" th:errors="*{locality}"></p>
+                        <p th:if="${#fields.hasErrors('localidad')}" class="text-danger" th:errors="*{localidad}"></p>
 
                         <div class="form-group mb-3">
-                            <label for="institutionalEmail">Institutional Email</label>
-                            <input type="email" id="institutionalEmail" class="form-control" name="institutionalEmail" th:field="*{institutionalEmail}">
+                            <label for="correoInstitucional">Correo institucional</label>
+                            <input type="email" id="correoInstitucional" class="form-control" name="correoInstitucional" th:field="*{correoInstitucional}">
                         </div>
-                        <p th:if="${#fields.hasErrors('institutionalEmail')}" class="text-danger" th:errors="*{institutionalEmail}"></p>
+                        <p th:if="${#fields.hasErrors('correoInstitucional')}" class="text-danger" th:errors="*{correoInstitucional}"></p>
 
                         <div class="form-group mb-3">
                             <label for="itr">ITR</label>
-                            <select type="text" id="itr" class="form-control" name="itr" th:field="*{itr}">
-                                <option th:each="itr : ${itrs}" th:value="${itr.getId()}" th:text="${itr.getName()}"></option>
+                            <select id="itr" class="form-control" name="itr" th:field="*{itr}">
+                                <option th:each="itr : ${itrs}" th:value="${itr.id}" th:text="${itr.nombre}"></option>
                             </select>
                         </div>
                         <p th:if="${#fields.hasErrors('itr')}" class="text-danger" th:errors="*{itr}"></p>
 
                         <div class="form-check mb-3">
-                            <label class="form-check-label">Are you a:</label>
+                            <label class="form-check-label">¿Rol?</label>
                             <div>
-                                <input type="radio" id="student" name="userType" value="student" class="form-check-input">
-                                <label for="student" class="form-check-label">Student</label>
+                                <input type="radio" id="estudiante" name="tipoUsuario" value="estudiante" class="form-check-input">
+                                <label for="estudiante" class="form-check-label">Estudiante</label>
                             </div>
                             <div>
-                                <input type="radio" id="tutor" name="userType" value="tutor" class="form-check-input">
-                                <label for="tutor" class="form-check-label">Teacher</label>
+                                <input type="radio" id="tutor" name="tipoUsuario" value="tutor" class="form-check-input">
+                                <label for="tutor" class="form-check-label">Docente</label>
                             </div>
                         </div>
 
                         <div id="studentFields" style="display: none">
                             <div class="form-group mb-3">
-                                <label for="generation">Generation</label>
-                                <input type="text" id="generation" class="form-control" name="generation" th:field="*{generation}">
+                                <label for="generacion">Generación</label>
+                                <input type="text" id="generacion" class="form-control" name="generacion" th:field="*{generacion}">
                             </div>
                         </div>
 
                         <div id="tutorFields" style="display: none">
                             <div class="form-group mb-3">
-                                <label for="area">Area</label>
+                                <label for="area">Área</label>
                                 <input type="text" id="area" class="form-control" name="area" th:field="*{area}">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="teacherRole">Teacher Role</label>
-                                <input type="text" id="teacherRole" class="form-control" name="teacherRole" th:field="*{teacherRole}">
+                                <label for="rolDocente">Rol docente</label>
+                                <input type="text" id="rolDocente" class="form-control" name="rolDocente" th:field="*{rolDocente}">
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-primary">Registrarse</button>
                         </div>
                     </form>
-                    <p class="mt-3 text-center">Already registered? <a th:href="@{/login}" type="submit">Login here.</a></p>
+                    <p class="mt-3 text-center">¿Ya tienes cuenta? <a th:href="@{/login}">Inicia sesión aquí.</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const studentRadio = document.getElementById("student");
+        const studentRadio = document.getElementById("estudiante");
         const tutorRadio = document.getElementById("tutor");
         const studentFields = document.getElementById("studentFields");
         const tutorFields = document.getElementById("tutorFields");
@@ -179,33 +179,30 @@
         studentRadio.addEventListener("change", toggleFields);
         tutorRadio.addEventListener("change", toggleFields);
 
-        // Initialize fields on load
         toggleFields();
+
     });
 </script>
 <script>
-    document.getElementById("department").addEventListener("change", function () {
-        var departmentId = this.value;
+    document.getElementById("departamento").addEventListener("change", function () {
+        var departamentoId = this.value;
+        if (!departamentoId) return;
 
-        // Si no se selecciona un departamento válido, no hacer nada
-        if (!departmentId) return;
-
-        fetch("/localities/" + departmentId)
+        fetch("/localities/" + departamentoId)
             .then(response => response.json())
             .then(localities => {
-                var localitySelect = document.getElementById("locality");
-                localitySelect.innerHTML = ""; // Limpiar las opciones actuales
-
-                // Crear y agregar las nuevas opciones
+                var localidadSelect = document.getElementById("localidad");
+                localidadSelect.innerHTML = "";
                 localities.forEach(function(locality) {
                     var option = document.createElement("option");
                     option.value = locality.id;
-                    option.textContent = locality.name;
-                    localitySelect.appendChild(option);
+                    option.textContent = locality.nombre;
+                    localidadSelect.appendChild(option);
                 });
             })
-            .catch(error => console.error("Error fetching localities:", error));
+            .catch(error => console.error("Error al obtener localidades:", error));
     });
+
 </script>
 </body>
 </html>
