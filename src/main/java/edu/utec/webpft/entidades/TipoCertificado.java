@@ -20,8 +20,6 @@ public class TipoCertificado implements Serializable {
 
     private String descripcion;
 
-    private boolean activo;
-
     @OneToMany(mappedBy = "tipoCertificado")
     private List<Certificado> certificados;
 }

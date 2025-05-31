@@ -18,8 +18,6 @@ public class EstadoJustificacion {
 
     private String descripcion;
 
-    private boolean activo;
-
     @OneToMany(mappedBy = "estadoJustificacion")
     private List<Justificacion> justificaciones;
 }

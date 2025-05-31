@@ -29,6 +29,5 @@ public class Localidad {
     @OneToMany(mappedBy = "localidad", cascade = CascadeType.ALL)
     private List<Itr> itrs;
 
-    private Boolean anulado;
 }
 

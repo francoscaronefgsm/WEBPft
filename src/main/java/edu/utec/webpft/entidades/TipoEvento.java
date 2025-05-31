@@ -20,8 +20,6 @@ public class TipoEvento implements Serializable {
 
     private String descripcion;
 
-    private boolean activo;
-
     @OneToMany(mappedBy = "tipoEvento")
     private List<Evento> eventos;
 }

@@ -24,5 +24,4 @@ public class Tutor extends Usuario {
     @ManyToMany(mappedBy = "tutores")
     private List<Evento> eventos;
 
-    private Boolean anulado;
 }

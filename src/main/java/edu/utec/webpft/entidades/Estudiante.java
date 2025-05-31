@@ -30,7 +30,6 @@ public class Estudiante extends Usuario {
     @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL)
     private List<Reclamo> reclamos;
 
-    private Boolean anulado;
 
 
 }

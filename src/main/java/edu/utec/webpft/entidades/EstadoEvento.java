@@ -18,8 +18,6 @@ public class EstadoEvento {
 
     private String descripcion;
 
-    private boolean activo;
-
     @OneToMany(mappedBy = "estadoEvento")
     private List<Evento> eventos;
 }

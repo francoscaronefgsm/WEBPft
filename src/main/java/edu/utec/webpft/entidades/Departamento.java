@@ -25,6 +25,5 @@ public class Departamento {
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL)
     private List<Usuario> usuarios;
 
-    private Boolean anulado;
 }
 

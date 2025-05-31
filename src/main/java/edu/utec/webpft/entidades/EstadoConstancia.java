@@ -19,8 +19,6 @@ public class EstadoConstancia {
 
     private String descripcion;
 
-    private boolean activo;
-
     @OneToMany(mappedBy = "estadoConstancia")
     private List<Constancia> constancias;
 }

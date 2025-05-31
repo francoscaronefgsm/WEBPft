@@ -20,8 +20,6 @@ public class TipoConstancia implements Serializable {
 
     private String descripcion;
 
-    private boolean activo;
-
     @OneToMany(mappedBy = "tipoConstancia")
     private List<Constancia> constancias;
 }
