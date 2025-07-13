@@ -29,8 +29,8 @@
                 </li>
                 <li class="nav-item dropdown" data-bs-theme="dark">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span sec:authorize="hasRole('ADMIN')" th:text="Administración"></span>
-                        <span sec:authorize="hasRole('TEACHER')" th:text="Profesor"></span>
+                        <span sec:authorize="hasRole('ADMIN')" th:text="Analista"></span>
+                        <span sec:authorize="hasRole('TEACHER')" th:text="Tutor"></span>
                         <span sec:authorize="hasRole('STUDENT')" th:text="Estudiante"></span>
                     </a>
                     <ul sec:authorize="hasRole('ADMIN')" class="dropdown-menu">
@@ -56,7 +56,10 @@
                             <a class="btn-link nav-link" th:href="@{/attendances/attendancesAnalist}" type="submit">Registrar Asistencia</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-link nav-link" th:href="@{/admin/reports}" type="submit">Informes</a>
+                            <a class="btn-link nav-link" th:href="@{/justification/list/admin}" type="submit">Lista de Justificaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn-link nav-link" th:href="@{/admin/reports}" type="submit">Reportes</a>
                         </li>
                     </ul>
                     <ul sec:authorize="hasRole('TEACHER')" class="dropdown-menu">
@@ -72,7 +75,7 @@
                         <li class="nav-item">
                             <form th:action="@{/user/dropout}" method="post" class="d-inline">
                                 <input type="hidden" name="id" th:value="${#authentication.getPrincipal().getUser().getId()}">
-                                <button type="submit" class="btn-link nav-link">Abandonar</button>
+                                <button type="submit" class="btn-link nav-link">Darse de Baja</button>
                             </form>
                         </li>
                     </ul>
@@ -90,12 +93,18 @@
                             <a class="btn-link nav-link" th:href="@{/constancy/myList}" type="submit">Mis Constancias</a>
                         </li>
                         <li class="nav-item">
+                            <a class="btn-link nav-link" th:href="@{/justification/new}" type="submit">Nueva Justificación</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn-link nav-link" th:href="@{/justification/list/student}" type="submit">Mis Justificaciones</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="btn-link nav-link" th:href="@{/user/update}" type="submit">Actualizar Datos Personales</a>
                         </li>
                         <li class="nav-item">
                             <form th:action="@{/user/dropout}" method="post" class="d-inline">
                                 <input type="hidden" name="id" th:value="${#authentication.getPrincipal().getUser().getId()}">
-                                <button type="submit" class="btn-link nav-link">Abandonar</button>
+                                <button type="submit" class="btn-link nav-link">Darse de Baja</button>
                             </form>
                         </li>
                     </ul>
@@ -111,4 +120,5 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
+</html>
 </html>

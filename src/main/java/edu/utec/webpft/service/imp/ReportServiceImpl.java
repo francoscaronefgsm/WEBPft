@@ -25,8 +25,9 @@ public class ReportServiceImpl implements ReportService {
             JustificacionDto justificationDto = new JustificacionDto();
             justificationDto.setId(justification.getId());
             justificationDto.setFecha(justification.getFecha());
-            justificationDto.setEstado(justification.getEstadoJustificacion().getDescripcion());
-            justificationDto.setEvento(justification.getEvento());
+            justificationDto.setEstado(justification.getEstadoJustificacion().getId());
+            justificationDto.setEvento(justification.getEvento().getId());
+            justificationDto.setDescripcionEstado(justification.getEstadoJustificacion().getDescripcion());
             justificationDto.setInformacion(justification.getInformacion());
             justificationDto.setEstudiante(justification.getEstudiante().getId());
             justificationDtos.add(justificationDto);
@@ -44,7 +45,8 @@ public class ReportServiceImpl implements ReportService {
             constancyDto.setEvento(constancy.getEvento().getId());
             constancyDto.setTituloEvento(constancy.getEvento().getTitulo());
             constancyDto.setTipoConstancia(constancy.getTipoConstancia().getId());
-
+            constancyDto.setDescripcionEstadoConstancia(constancy.getEstadoConstancia().getDescripcion());
+            constancyDto.setDescripcionTipoConstancia(constancy.getTipoConstancia().getDescripcion());
             constancyDto.setInformacion(constancy.getInformacion());
             constancyDto.setEstudiante(constancy.getEstudiante().getId());
             constancyDtos.add(constancyDto);
@@ -71,6 +73,9 @@ public class ReportServiceImpl implements ReportService {
                     .stream()
                     .map(teacher -> teacher.getPrimerNombre() + " " + teacher.getPrimerApellido())
                     .collect(Collectors.toList()).toString());
+            eventDto.setDescripcionEstadoEvento(event.getEstadoEvento().getDescripcion());
+            eventDto.setDescripcionTipoEvento(event.getTipoEvento().getDescripcion());
+            eventDto.setDescripcionModalidad(event.getModalidad().getDescripcion());
             eventDtos.add(eventDto);
         }
         return eventDtos;
@@ -78,7 +83,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<JustificacionDto> findJustificationsByStudentId(Long studentId) {
-        return mapListJustificationToDto(justificationRepository.findAllByEstudianteId(studentId));
+        return mapListJustificationToDto(justificationRepository.findByEstudianteIdAndAnuladoFalseOrAnuladoIsNull(studentId));
     }
 
     @Override

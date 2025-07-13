@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface ConstancyRepository extends JpaRepository<Constancia, Long> {
     List<Constancia> findConstancyByEstudianteId(Long studentId);
+    List<Constancia> findConstancyByEstudianteIdAndAnuladoFalseOrAnuladoNull(Long studentId);
     List<Constancia> findAllByEstudianteId(Long id);
+    List<Constancia> findByAnuladoFalseOrAnuladoIsNull();
 }

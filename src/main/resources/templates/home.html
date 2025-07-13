@@ -24,7 +24,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin: auto;
-            margin-top: -70px;
+            margin-top: -70px; /* Ajustado para que el grid 2 no quede tan abajo */
             min-width: 1300px;
         }
 
@@ -54,7 +54,6 @@
 <div th:insert="~{fragments/header :: header}"></div>
 
 <div class="button-grid">
-    <!-- Opciones para ADMIN -->
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/admin}">
         Lista de Usuarios
@@ -91,11 +90,14 @@
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+       class="button-item" th:href="@{/justification/list/admin}">
+        Lista de Justificaciones
+    </a>
+    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
        class="button-item" th:href="@{/admin/reports}">
         Reportes
     </a>
 
-    <!-- Opciones para DOCENTE -->
     <a th:if="${#authorization.expression('hasRole(''TEACHER'')')}"
        class="button-item" th:href="@{/user/update}">
         Actualizar Datos Personales
@@ -111,7 +113,6 @@
         Registrar Asistencia
     </a>
 
-    <!-- Opciones para ESTUDIANTE -->
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/user/claim/new}">
         Nuevo Reclamo
@@ -126,19 +127,27 @@
        class="button-item" th:href="@{/constancy/new}">
         Nueva Constancia
     </a>
-</div>
 
-<div class="button-grid2">
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/constancy/myList}">
         Mis Constancias
     </a>
 
     <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
+       class="button-item" th:href="@{/justification/new}">
+        Nueva Justificación
+    </a>
+
+    <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
+       class="button-item" th:href="@{/justification/list/student}">
+        Mis Justificaciones
+    </a>
+    <a th:if="${#authorization.expression('hasRole(''STUDENT'')')}"
        class="button-item" th:href="@{/user/update}">
         Actualizar Datos Personales
     </a>
 </div>
+
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

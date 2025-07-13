@@ -45,6 +45,8 @@ public class WebPftApplication implements CommandLineRunner {
     private final EstadoJustificacionRepository estadoJustificacionRepository;
     private final TipoReclamoRepository tipoReclamoRepository;
     private final EstadoReclamoRepository estadoReclamoRepository;
+    private final TipoConstanciaRepository tipoConstanciaRepository;
+    private final EstadoConstanciaRepository estadoConstanciaRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(WebPftApplication.class, args);
@@ -255,19 +257,32 @@ public class WebPftApplication implements CommandLineRunner {
         List<Usuario> teachers = new ArrayList<>();
         teachers.add(teacher);
 
-//        constancyTypes.add("Constancia de Transporte");
-//        constancyTypes.add("Constancias de Examen");
-//        constancyTypes.add("Constancia de prueba parcial");
-//        constancyTypes.add("Constancia de jornada externa");
-//
-//        constancyStatus.add("Ingresado");
-//        constancyStatus.add("En proceso");
-//        constancyStatus.add("Finalizado");
+
+        TipoConstancia tipoConstanciaTransporte = TipoConstancia.builder().descripcion("Constancia de Transporte").build();
+        TipoConstancia tipoConstanciaExamen = TipoConstancia.builder().descripcion("Constancia de examen").build();
+        TipoConstancia tipoConstanciaPruebaFinal = TipoConstancia.builder().descripcion("Constancia de prueba de final").build();
+        TipoConstancia tipoConstanciaJornadaExterna = TipoConstancia.builder().descripcion("Constancia de jornada de externa").build();
+        List<TipoConstancia> tiposConstancia = new ArrayList<>();
+        tiposConstancia.add(tipoConstanciaTransporte);
+        tiposConstancia.add(tipoConstanciaExamen);
+        tiposConstancia.add(tipoConstanciaPruebaFinal);
+        tiposConstancia.add(tipoConstanciaJornadaExterna);
+        tipoConstanciaRepository.saveAll(tiposConstancia);
+
+        EstadoConstancia estadoConstanciaIngresado = EstadoConstancia.builder().descripcion("Ingresado").build();
+        EstadoConstancia estadoConstanciaEnProceso = EstadoConstancia.builder().descripcion("En proceso").build();
+        EstadoConstancia estadoConstanciaFinalizado = EstadoConstancia.builder().descripcion("Finalizado").build();
+        List<EstadoConstancia> estadosConstancia = new ArrayList<>();
+        estadosConstancia.add(estadoConstanciaIngresado);
+        estadosConstancia.add(estadoConstanciaEnProceso);
+        estadosConstancia.add(estadoConstanciaFinalizado);
+        estadoConstanciaRepository.saveAll(estadosConstancia);
 
 
-        ModalidadEvento modalidadEventoPresencial = ModalidadEvento.builder().descripcion("Presencial").activo(true).build();
-        ModalidadEvento modalidadEventoVirtual = ModalidadEvento.builder().descripcion("Virtual").activo(true).build();
-        ModalidadEvento modalidadEventoSemipresencial = ModalidadEvento.builder().descripcion("Semipresencial").activo(true).build();
+
+        ModalidadEvento modalidadEventoPresencial = ModalidadEvento.builder().descripcion("Presencial").build();
+        ModalidadEvento modalidadEventoVirtual = ModalidadEvento.builder().descripcion("Virtual").build();
+        ModalidadEvento modalidadEventoSemipresencial = ModalidadEvento.builder().descripcion("Semipresencial").build();
         List<ModalidadEvento> modalidades = new ArrayList<>();
         modalidades.add(modalidadEventoPresencial);
         modalidades.add(modalidadEventoVirtual);
@@ -275,13 +290,13 @@ public class WebPftApplication implements CommandLineRunner {
         modalidadEventoRepository.saveAll(modalidades);
 
 
-        TipoEvento tipoEventoJornadaPrescencial = TipoEvento.builder().descripcion("Jornada prescencial").activo(true).build();
-        TipoEvento tipoEventoExamen = TipoEvento.builder().descripcion("Examen").activo(true).build();
-        TipoEvento tipoEventoDefensaProyecto = TipoEvento.builder().descripcion("Defensa de proyecto").activo(true).build();
-        TipoEvento tipoEventoPruebaFinal = TipoEvento.builder().descripcion("Prueba final").activo(true).build();
-        TipoEvento tipoEventoVme = TipoEvento.builder().descripcion("Convocatoria VME").activo(true).build();
-        TipoEvento tipoEventoOptativa = TipoEvento.builder().descripcion("Convocatoria optativa").activo(true).build();
-        TipoEvento tipoEventoOtro = TipoEvento.builder().descripcion("Otro").activo(true).build();
+        TipoEvento tipoEventoJornadaPrescencial = TipoEvento.builder().descripcion("Jornada prescencial").build();
+        TipoEvento tipoEventoExamen = TipoEvento.builder().descripcion("Examen").build();
+        TipoEvento tipoEventoDefensaProyecto = TipoEvento.builder().descripcion("Defensa de proyecto").build();
+        TipoEvento tipoEventoPruebaFinal = TipoEvento.builder().descripcion("Prueba final").build();
+        TipoEvento tipoEventoVme = TipoEvento.builder().descripcion("Convocatoria VME").build();
+        TipoEvento tipoEventoOptativa = TipoEvento.builder().descripcion("Convocatoria optativa").build();
+        TipoEvento tipoEventoOtro = TipoEvento.builder().descripcion("Otro").build();
         List<TipoEvento> tiposEvento = new ArrayList<>();
         tiposEvento.add(tipoEventoJornadaPrescencial);
         tiposEvento.add(tipoEventoExamen);
@@ -292,9 +307,9 @@ public class WebPftApplication implements CommandLineRunner {
         tiposEvento.add(tipoEventoDefensaProyecto);
         tipoEventoRepository.saveAll(tiposEvento);
 
-        TipoReclamo tipoReclamoConvocatoria = TipoReclamo.builder().descripcion("Convocatoria VME").activo(true).build();
-        TipoReclamo tipoReclamoActividadApe = TipoReclamo.builder().descripcion("Actividad APE").activo(true).build();
-        TipoReclamo tipoReclamoOptativa = TipoReclamo.builder().descripcion("Optativa").activo(true).build();
+        TipoReclamo tipoReclamoConvocatoria = TipoReclamo.builder().descripcion("Convocatoria VME").build();
+        TipoReclamo tipoReclamoActividadApe = TipoReclamo.builder().descripcion("Actividad APE").build();
+        TipoReclamo tipoReclamoOptativa = TipoReclamo.builder().descripcion("Optativa").build();
         List<TipoReclamo> tiposReclamo = new ArrayList<>();
         tiposReclamo.add(tipoReclamoConvocatoria);
         tiposReclamo.add(tipoReclamoActividadApe);
@@ -310,9 +325,9 @@ public class WebPftApplication implements CommandLineRunner {
         estadosReclamo.add(estadoFinalizadoReclamo);
         estadoReclamoRepository.saveAll(estadosReclamo);
 
-        EstadoEvento estadoEventoCorriente = EstadoEvento.builder().descripcion("Corriente").activo(true).build();
+        EstadoEvento estadoEventoCorriente = EstadoEvento.builder().descripcion("Corriente").build();
         EstadoEvento estadoEventoFinalizado = EstadoEvento.builder().descripcion("Finalizado").build();
-        EstadoEvento estadoEventoFuturo = EstadoEvento.builder().descripcion("Futuro").activo(true).build();
+        EstadoEvento estadoEventoFuturo = EstadoEvento.builder().descripcion("Futuro").build();
         List<EstadoEvento> estadosEvento = new ArrayList<>();
         estadosEvento.add(estadoEventoCorriente);
         estadosEvento.add(estadoEventoFinalizado);
@@ -328,10 +343,10 @@ public class WebPftApplication implements CommandLineRunner {
         Asistencia convocatoria = Asistencia.builder().evento(bantotal).estado("Asistencia").estudiante(student).calificacion(4).build();
         attendanceRepository.save(convocatoria);
 
-        EstadoJustificacion estadoJustificacion = EstadoJustificacion.builder().descripcion("Ingresado").activo(true).build();
+        EstadoJustificacion estadoJustificacion = EstadoJustificacion.builder().descripcion("Ingresado").build();
         estadoJustificacionRepository.save(estadoJustificacion);
 
-        Justificacion justificacion = Justificacion.builder().evento("Bantotal").estadoJustificacion(estadoJustificacion).estudiante(student).informacion("Ausencia por turno Medico").fecha(LocalDateTime.of(2024, Month.DECEMBER, 17, 9, 0)).build();
+        Justificacion justificacion = Justificacion.builder().evento(bantotal).estadoJustificacion(estadoJustificacion).estudiante(student).informacion("Ausencia por turno Medico").fecha(LocalDateTime.of(2024, Month.DECEMBER, 17, 9, 0)).build();
         justificationRepository.save(justificacion);
     }
 }

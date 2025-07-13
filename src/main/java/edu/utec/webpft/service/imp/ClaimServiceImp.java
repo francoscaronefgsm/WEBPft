@@ -45,12 +45,18 @@ public class ClaimServiceImp implements ClaimService {
         claim.setDescripcion(claimDto.getDescripcion());
         claim.setCreado(claimDto.getCreado());
         claim.setActualizado(claimDto.getActualizado());
+        System.out.println();
         claim.setTipoReclamo(tipoReclamoRepository.getById(claimDto.getTipoReclamoDto()));
         claim.setSemestre(claimDto.getSemestre());
         claim.setFecha(claimDto.getFecha());
         claim.setDocente(claimDto.getDocente());
         claim.setCreditos(claimDto.getCreditos());
-        claim.setEstadoReclamo(estadoReclamoRepository.getById(claimDto.getEstadoReclamoDto()));
+        if(claimDto.getEstadoReclamoDto() != null){
+            claim.setEstadoReclamo(estadoReclamoRepository.getById(claimDto.getEstadoReclamoDto()));
+        }else{
+            claim.setEstadoReclamo(estadoReclamoRepository.getById(1l));
+        }
+
 
         claim.setEstudiante(studentRepository.findById(claimDto.getUsuario())
                 .orElseThrow(() -> new RuntimeException("Estudiante no encontrado")));
@@ -59,7 +65,6 @@ public class ClaimServiceImp implements ClaimService {
 
     @Override
     public ReclamoDto save(ReclamoDto claimDto) {
-        claimDto.setEstadoReclamoDto(1l);
         claimDto.setCreado(LocalDateTime.now());
         Reclamo claim = claimRepository.save(mapToEntity(claimDto));
         return mapToDto(claim);
@@ -84,7 +89,8 @@ public class ClaimServiceImp implements ClaimService {
     public void delete(Long id) {
         Reclamo claim = claimRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Reclamo not found"));
-        claimRepository.delete(claim);
+        claim.setAnulado(true);
+        claimRepository.save(claim);
     }
 
     @Override
@@ -96,7 +102,7 @@ public class ClaimServiceImp implements ClaimService {
 
     @Override
     public List<ReclamoDto> findAll() {
-        return claimRepository.findAll()
+        return claimRepository.findByAnuladoFalseOrAnuladoIsNull()
                 .stream()
                 .map(this::mapToDto)
                 .toList();
@@ -104,7 +110,7 @@ public class ClaimServiceImp implements ClaimService {
 
     @Override
     public List<ReclamoDto> findAllByUserId(Long id) {
-        return claimRepository.findAllByEstudianteId(id)
+        return claimRepository.findAllByEstudianteIdAndAnuladoFalseOrAnuladoIsNull(id)
                 .stream()
                 .map(this::mapToDto)
                 .toList();

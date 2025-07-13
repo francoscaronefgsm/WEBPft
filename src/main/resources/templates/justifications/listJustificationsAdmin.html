@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Todas las Constancias</title>
+    <title>Lista de Justificaciones (Administrador)</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -15,44 +15,45 @@
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container-fluid mt-3 mb-3"> <div class="card shadow" style="width: 80%; margin: 0 auto;">
-    <div class="card-header">
-        <h3>Lista de Constancias</h3>
+<div class="container-fluid mt-3 mb-3">
+    <div class="card shadow" style="width: 80%; margin: 0 auto;">
+        <div class="card-header">
+            <h3>Lista de Justificaciones</h3>
+        </div>
+        <div class="card-body table-container">
+            <table id="listaJustificacionesAdmin" class="table table-hover mt-4">
+                <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Evento</th>
+                    <th>Fecha</th>
+                    <th>Información</th>
+                    <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="justification : ${justifications}">
+                    <td th:text="${justification.nombreEstudiante}"></td>
+                    <td th:text="${justification.descripcionEvento}"></td>
+                    <td th:text="${#temporals.format(justification.fecha, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${justification.informacion}"></td>
+                    <td th:text="${justification.descripcionEstado}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="card-body table-container">
-        <table id="listaConstancias" class="table table-hover mt-4">
-            <thead>
-            <tr>
-                <th>Nombre del Estudiante</th>
-                <th>Tipo de Constancia</th>
-                <th>Título del Evento</th>
-                <th>Información</th>
-                <th>Estado</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="constancia : ${constancies}">
-                <td th:text="${constancia.getNombreEstudiante()}"></td>
-                <td th:text="${constancia.getDescripcionTipoConstancia()}"></td>
-                <td th:text="${constancia.getTituloEvento()}"></td>
-                <td th:text="${constancia.getInformacion()}"></td>
-                <td th:text="${constancia.getDescripcionEstadoConstancia()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 </div>
 <div th:replace="~{fragments/footer :: footer}"></div>
+
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.datatables.net/2.0.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/v/dt/dt-2.1.2/datatables.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#listaConstancias').DataTable({
+        $('#listaJustificacionesAdmin').DataTable({
             "pagingType": "simple_numbers",
             "searching": true,
-            "lengthMenu": [10, 25, 50, 100],
             "language": {
                 "lengthMenu": "Mostrar _MENU_ filas por página",
                 "zeroRecords": "No se encontraron resultados",
@@ -71,9 +72,7 @@
                     "sortDescending": ": activar para ordenar la columna de manera descendente"
                 }
             },
-            "buttons": [
-                'copy', 'excel', 'pdf'
-            ]
+            "buttons": [ 'pdf' ]
         });
     });
 </script>

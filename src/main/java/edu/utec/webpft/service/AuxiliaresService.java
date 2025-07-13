@@ -16,4 +16,6 @@ public interface AuxiliaresService {
     List<EstadoReclamoDto> obtenerEstadosReclamos();
     List<TipoReclamoDto> obtenerTiposReclamo();
 
+    List<EstadoJustificacionDto> obtenerEstadosJustificacion();
+
 }

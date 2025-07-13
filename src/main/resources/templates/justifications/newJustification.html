@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Nueva Constancia</title>
+    <title>Crear Nueva Justificación</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -19,34 +19,28 @@
         <div class="col-md-8">
             <div class="card shadow">
                 <div class="card-header">
-                    <h3 class="text-center">Crear Nueva Constancia</h3>
+                    <h3 class="text-center">Crear Nueva Justificación de Inasistencia</h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" role="form" th:action="@{/constancy/create}">
-                        <div class="form-group mb-3">
-                            <label for="tipoConstancia">Tipo de Constancia</label>
-                            <select id="tipoConstancia" name="tipoConstancia" class="form-control" required>
-                                <option th:each="tipoConstancia : ${constancyTypes}"
-                                        th:value="${tipoConstancia.id}"
-                                        th:text="${tipoConstancia.descripcion}">Tipo de Constancia</option>
-                            </select>
-                        </div>
+                    <form method="post" role="form" th:action="@{/justification/create}">
+
                         <div class="form-group mb-3">
                             <label for="evento">Evento</label>
                             <select id="evento" name="evento" class="form-control" required>
-                                <option th:each="evento : ${events}"
-                                        th:value="${evento.getId()}"
-                                        th:text="${evento.getTitulo()}">Evento</option>
+                                <option value="">Seleccione un evento</option>
+                                <option th:each="event : ${events}"
+                                        th:value="${event.id}"
+                                        th:text="${event.titulo}">Título del Evento</option>
                             </select>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="informacion">Información</label>
-                            <textarea id="informacion" class="form-control" name="informacion" placeholder="Ingrese información" required></textarea>
+                            <label for="informacion">Información (Motivo Inasistencia)</label>
+                            <textarea id="informacion" class="form-control" name="informacion" rows="3" placeholder="Ingrese el motivo de la justificación" required></textarea>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Crear Constancia</button>
+                            <button type="submit" class="btn btn-primary">Crear Justificación</button>
                             <a href="#" class="btn btn-secondary">Cancelar</a>
                         </div>
                     </form>
@@ -60,7 +54,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
-</script>
 </body>
 </html>

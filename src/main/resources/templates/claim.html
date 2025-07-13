@@ -29,8 +29,7 @@
                     <th>Descripción</th>
                     <th>Creado</th>
                     <th>Actualizado</th>
-                    <th>VME</th>
-                    <th>APE</th>
+                    <th>Tipo</th>
                     <th>Semestre</th>
                     <th>Fecha</th>
                     <th>Docente</th>
@@ -43,18 +42,17 @@
                 <tbody>
                 <tr th:each="claim : ${claims}">
                     <td th:text="${claim.id}"></td>
-                    <td th:text="${claim.title}"></td>
-                    <td th:text="${claim.description}"></td>
-                    <td th:text="${#temporals.format(claim.created, 'dd/MM/yyyy HH:mm')}"></td>
-                    <td th:text="${#temporals.format(claim.updated, 'dd/MM/yyyy HH:mm')}"></td>
-                    <td th:text="${claim.eventVme}"></td>
-                    <td th:text="${claim.activityApe}"></td>
-                    <td th:text="${claim.semester}"></td>
-                    <td th:text="${#temporals.format(claim.date, 'dd/MM/yyyy HH:mm')}"></td>
-                    <td th:text="${claim.teacher}"></td>
-                    <td th:text="${claim.credits}"></td>
-                    <td th:text="${claim.status}"></td>
-                    <td th:text="${userService.getUsernameById(claim.user)}"></td>
+                    <td th:text="${claim.titulo}"></td>
+                    <td th:text="${claim.descripcion}"></td>
+                    <td th:text="${#temporals.format(claim.creado, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#temporals.format(claim.actualizado, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${claim.descripcionTipoReclamo}"></td>
+                    <td th:text="${claim.semestre}"></td>
+                    <td th:text="${#temporals.format(claim.fecha, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${claim.docente}"></td>
+                    <td th:text="${claim.creditos}"></td>
+                    <td th:text="${claim.descripcionEstadoReclamo}"></td>
+                    <td th:text="${userService.getUsernameById(claim.usuario)}"></td>
                     <td>
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#actionModal"
                                 th:data-id="${claim.id}" onclick="setClaimId(this)">
@@ -84,12 +82,14 @@
                     <!-- Campo oculto para enviar el ID del reclamo -->
                     <input type="hidden" name="claimIdInput" id="claimIdInput" />
 
-                    <label for="status">Estado:</label>
-                    <select name="status" id="status" class="form-select">
-                        <option value="PENDING">PENDIENTE</option>
-                        <option value="IN_PROGRESS">EN PROCESO</option>
-                        <option value="COMPLETED">COMPLETADO</option>
-                    </select>
+                    <div class="form-group mb-3">
+                        <label for="estado">Estado</label>
+                        <select id="estado" name="estado" class="form-control">
+                            <option th:each="status : ${estadosReclamo}"
+                                    th:value="${status.id}"
+                                    th:text="${status.descripcion}">Estado del Evento</option>
+                        </select>
+                    </div>
 
                     <!-- Campo de texto para ingresar la acción tomada -->
                     <div class="mt-3">

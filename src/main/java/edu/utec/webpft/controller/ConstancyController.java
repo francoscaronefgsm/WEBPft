@@ -50,7 +50,7 @@ public class ConstancyController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioDto userDto = userService.findUsuarioDtoByUsername(username);
         constancyDto.setEstudiante(userDto.getId());
-        constancyDto.setEstadoConstancia(0l);
+        constancyDto.setEstadoConstancia(1l);
         constancyDto.setFecha(LocalDateTime.now());
         constancyService.save(constancyDto);
         return "redirect:/constancy/myList";

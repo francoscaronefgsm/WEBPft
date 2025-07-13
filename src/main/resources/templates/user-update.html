@@ -113,7 +113,7 @@
                         </div>
                         <p th:if="${#fields.hasErrors('itr')}" class="text-danger" th:errors="*{itr}"></p>
 
-                        <div th:if="${user.generation > 0}" id="studentFields">
+                        <div th:if="${user.generacion > 0}" id="studentFields">
                             <div class="form-group mb-3">
                                 <label for="generation">Generación</label>
                                 <input type="text" id="generation" class="form-control" name="generation" th:field="*{generacion}">

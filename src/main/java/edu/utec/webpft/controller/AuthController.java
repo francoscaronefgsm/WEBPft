@@ -72,20 +72,20 @@ public class AuthController {
         Validator validator = new Validator();
 
         if(userService.existsByUsername(user.getNombreUsuario())) {
-            result.rejectValue("nombreUsuario", "error.user", "Username already in use");
+            result.rejectValue("nombreUsuario", "error.user", "El Usuario ya esta en uso");
         }
 
         if(userService.existsByPersonalEmail(user.getCorreoPersonal())) {
-            result.rejectValue("correoPersonal", "error.user", "Personal email already in use");
+            result.rejectValue("correoPersonal", "error.user", "El correo personal ya esta registrado");
         }
 
         if(userService.existsByInstitutionalEmail(user.getCorreoInstitucional())) {
-            result.rejectValue("correoInstitucional", "error.user", "Institutional email already in use");
+            result.rejectValue("correoInstitucional", "error.user", "El correo institucional ya esta registrado");
         }
 
         if(user.getDocumento()!=null){
             if(userService.existsByDocument(user.getDocumento())) {
-                result.rejectValue("documento", "error.user", "Document already in use");
+                result.rejectValue("documento", "error.user", "El documento ya esta registrado");
             }
 
             if(!validator.validateCi(user.getDocumento())){

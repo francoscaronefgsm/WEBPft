@@ -55,5 +55,8 @@ public class Evento {
     @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Constancia> constancias;
 
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Justificacion> justificaciones;
+
     private Boolean anulado;
 }

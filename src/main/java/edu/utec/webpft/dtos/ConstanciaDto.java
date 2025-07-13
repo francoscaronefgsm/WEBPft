@@ -29,5 +29,9 @@ public class ConstanciaDto {
 
     private String nombreEstudiante;
 
+    private String descripcionTipoConstancia;
+
+    private String descripcionEstadoConstancia;
+
 }
 

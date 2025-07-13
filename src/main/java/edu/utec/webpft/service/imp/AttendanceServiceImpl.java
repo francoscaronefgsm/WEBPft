@@ -28,9 +28,9 @@ public class AttendanceServiceImpl implements AttendanceService {
         Asistencia asistencia = new Asistencia();
         asistencia.setId(attendanceDto.getId());
         asistencia.setEstudiante(studentRepository.findById(attendanceDto.getEstudiante())
-                .orElseThrow(() -> new RuntimeException("User not found"))); // Asegúrate de que el Dto contenga el objeto Student
+                .orElseThrow(() -> new RuntimeException("Useuario no encontrado"))); // Asegúrate de que el Dto contenga el objeto Student
         asistencia.setEvento(eventRepository.findById(attendanceDto.getEvento())
-                .orElseThrow(() -> new RuntimeException("Evento not found")));
+                .orElseThrow(() -> new RuntimeException("Evento no encontrado")));
         asistencia.setEstado(attendanceDto.getEstado());
         asistencia.setCalificacion(attendanceDto.getCalificacion());
         return asistencia;
@@ -66,7 +66,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendance.setEstudiante(studentRepository.findById(attendanceDto.getEstudiante())
                 .orElseThrow(() -> new RuntimeException("User not found"))); // Asegúrate de que el Dto contenga el objeto Student
         attendance.setEvento(eventRepository.findById(attendanceDto.getEvento())
-                .orElseThrow(() -> new RuntimeException("Evento not found")));
+                .orElseThrow(() -> new RuntimeException("Evento no encontrado")));
         attendanceRepository.save(attendance);
     }
 

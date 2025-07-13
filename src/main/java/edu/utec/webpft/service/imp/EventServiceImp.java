@@ -88,19 +88,22 @@ public class EventServiceImp implements EventService {
         event.setFechaFin(eventDto.getFechaFin());
         event.setItr(itrRepository.getReferenceById(eventDto.getItr())); // Asumiendo que el objeto Itr ya está en formato adecuado
         event.setUbicacion(eventDto.getUbicacion());
-        List<Usuario> validTutores = eventDto.getDocentes().stream()
-                .map(teacherId -> userRepository.findUserById(teacherId).orElse(null))
-                .filter(Objects::nonNull) // Filtrar solo aquellos que existen en el repositorio
-                .collect(Collectors.toList());
-        event.setTutores(validTutores);// Asumiendo que la lista de Tutor ya está mapeada
+        if (eventDto.getDocentes() != null) {
+            List<Usuario> newTutores = eventDto.getDocentes().stream()
+                    .map(teacherId -> userRepository.findUserById(teacherId).orElse(null))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+            event.setTutores(newTutores);
+        }
         return mapToDto(eventRepository.save(event));
     }
 
     @Override
     public void delete(Long id) {
-        Evento claim = eventRepository.findById(id)
+        Evento event = eventRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Evento not found"));
-        eventRepository.delete(claim);
+        event.setAnulado(true);
+        eventRepository.save(event);
     }
 
     @Override
@@ -112,7 +115,7 @@ public class EventServiceImp implements EventService {
 
     @Override
     public List<EventoDto> findAll() {
-        return eventRepository.findAll()
+        return eventRepository.findByAnuladoFalseOrAnuladoIsNull()
                 .stream()
                 .map(this::mapToDto)
                 .toList();

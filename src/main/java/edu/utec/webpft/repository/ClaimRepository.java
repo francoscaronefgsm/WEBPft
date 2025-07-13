@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ClaimRepository extends JpaRepository<Reclamo, Long> {
 
-    List<Reclamo> findAllByEstudianteId(Long id);
+    List<Reclamo> findAllByEstudianteIdAndAnuladoFalseOrAnuladoIsNull(Long id);
     Reclamo findReclamoById(Long id);
+    List<Reclamo> findByAnuladoFalseOrAnuladoIsNull();
 }

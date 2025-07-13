@@ -46,7 +46,7 @@ public class AttendanceController {
         return "attendances/attendanceRegisterAnalist";
     }
 
-    @GetMapping("/attendancesTutor")
+    @GetMapping("/attendancesTeacher")
     public String teacherListEvents(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         UsuarioDto userDto = userService.findUsuarioDtoByUsername(username);
@@ -70,7 +70,7 @@ public class AttendanceController {
         model.addAttribute("attendances", attendancesFiltradas);
         model.addAttribute("attendanceStatus", attendanceStatus);
 
-        return "attendances/attendanceRegisterTutor";
+        return "attendances/attendanceRegisterTeacher";
     }
 
 
@@ -120,7 +120,7 @@ public class AttendanceController {
         attendanceDto.setEstudiante(attendanceOriginal.getEstudiante());
         attendanceDto.setEvento(attendanceOriginal.getEvento());
         attendanceService.save(attendanceDto);
-        return "redirect:/attendances/attendancesTutor";
+        return "redirect:/attendances/attendancesTeacher";
     }
 
 

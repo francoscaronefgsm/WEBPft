@@ -73,6 +73,8 @@ public class AdminController {
     @GetMapping("/claim")
     public String claims(Model model) {
         List<ReclamoDto> claims = claimService.findAll();
+        List<EstadoReclamoDto> estadosReclamo = auxiliaresService.obtenerEstadosReclamos();
+        model.addAttribute("estadosReclamo", estadosReclamo);
         model.addAttribute("userService", userService);
         model.addAttribute("claims", claims);
         return "claim";
@@ -87,10 +89,10 @@ public class AdminController {
 
     @PostMapping("/claim/actionTaken")
     public String changeClaimStatusAndRegisterAction(@RequestParam Long claimIdInput,
-                                                     @RequestParam Long status,
+                                                     @RequestParam Long estado,
                                                      @RequestParam String actionTaken) {
         // Cambiar el estado del reclamo
-        claimService.changeStatus(claimIdInput, status);
+        claimService.changeStatus(claimIdInput, estado);
 
         UsuarioDto userDto = userService.findUsuarioDtoByUsername
                 (SecurityContextHolder.getContext().getAuthentication().getName());
@@ -99,7 +101,12 @@ public class AdminController {
         AccionRealizadaDto actionTakenDto = new AccionRealizadaDto();
         actionTakenDto.setReclamo(claimIdInput); // Asignar el reclamo asociado
         actionTakenDto.setAdministrador(userDto.getId()); // Asignar el admin que realizo la accion
-        actionTakenDto.setEstado(auxiliaresService.obtenerEstadosReclamos().get(status.intValue()).getDescripcion());
+        for(EstadoReclamoDto estadoId : auxiliaresService.obtenerEstadosReclamos()){
+            if(estadoId.getId()==(estado.intValue())){
+                actionTakenDto.setEstado(estadoId.getDescripcion());
+            }
+        }
+
         actionTakenDto.setAccionTomada(actionTaken); // Registrar la acción tomada
 
         actionTakenService.save(actionTakenDto); // Guardar en la base de datos

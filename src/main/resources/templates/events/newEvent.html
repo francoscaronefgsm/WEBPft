@@ -25,13 +25,13 @@
 
                     <form method="post" role="form" th:action="@{/event/create}">
                         <div class="form-group mb-3">
-                            <label for="title">Título</label>
-                            <input type="text" id="title" class="form-control" name="title" placeholder="Ingrese el título" required>
+                            <label for="titulo">Título</label>
+                            <input type="text" id="titulo" class="form-control" name="titulo" placeholder="Ingrese el título" required>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="eventType">Tipo de Evento</label>
-                            <select id="eventType" name="eventType" class="form-control">
+                            <label for="tipoEvento">Tipo de Evento</label>
+                            <select id="tipoEvento" name="tipoEvento" class="form-control">
                                 <option th:each="eventType : ${eventTypes}"
                                         th:value="${eventType.id}"
                                         th:text="${eventType.descripcion}">Tipo de Evento</option>
@@ -39,8 +39,8 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="mode">Modalidad</label>
-                            <select id="mode" name="mode" class="form-control">
+                            <label for="modalidad">Modalidad</label>
+                            <select id="modalidad" name="modalidad" class="form-control">
                                 <option th:each="mode : ${eventModes}"
                                         th:value="${mode.id}"
                                         th:text="${mode.descripcion}">Modalidad del Evento</option>
@@ -106,9 +106,9 @@
         crossorigin="anonymous"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const startingDateInput = document.getElementById("startingDate");
-        const endingDateInput = document.getElementById("endingDate");
-        const teachersSelect = document.getElementById("teachers");
+        const startingDateInput = document.getElementById("fechaInicio");
+        const endingDateInput = document.getElementById("fechaFin");
+        const teachersSelect = document.getElementById("profesores");
         const form = document.querySelector("form");
 
         function validateDates() {

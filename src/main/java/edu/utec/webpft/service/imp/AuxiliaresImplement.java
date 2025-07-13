@@ -21,10 +21,11 @@ public class AuxiliaresImplement implements AuxiliaresService {
     private final EstadoConstanciaRepository estadoConstanciaRepository;
     private final EstadoReclamoRepository estadoReclamoRepository;
     private final TipoReclamoRepository tipoReclamoRepository;
+    private final EstadoJustificacionRepository estadoJustificacionRepository;
 
     @Override
     public List<TipoEventoDto> obtenerTiposEvento() {
-        return List.of();
+        return tipoEventosToDto(tipoEventoRepository.findAll());
     }
 
     @Override
@@ -55,6 +56,11 @@ public class AuxiliaresImplement implements AuxiliaresService {
     @Override
     public List<TipoReclamoDto> obtenerTiposReclamo() {
         return tipoReclamosToDto(tipoReclamoRepository.findAll());
+    }
+
+    @Override
+    public List<EstadoJustificacionDto> obtenerEstadosJustificacion() {
+        return estadoJustificacionToDto(estadoJustificacionRepository.findAll());
     }
 
 
@@ -103,7 +109,16 @@ public class AuxiliaresImplement implements AuxiliaresService {
         }).collect(Collectors.toList());
     }
 
-    private List<EstadoConstanciaDto> estadoConstanciasToDto(List<EstadoConstancia> estadoConstancias) {
+    private List<EstadoJustificacionDto> estadoJustificacionToDto(List<EstadoJustificacion> estadosJustificacion) {
+        return estadosJustificacion.stream().map(estadoJustificacion -> {
+            EstadoJustificacionDto dto = new EstadoJustificacionDto();
+            dto.setId(estadoJustificacion.getId());
+            dto.setDescripcion(estadoJustificacion.getDescripcion());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+        private List<EstadoConstanciaDto> estadoConstanciasToDto(List<EstadoConstancia> estadoConstancias) {
         return estadoConstancias.stream().map(estadoConstancia -> {
             EstadoConstanciaDto dto = new EstadoConstanciaDto();
             dto.setId(estadoConstancia.getId());

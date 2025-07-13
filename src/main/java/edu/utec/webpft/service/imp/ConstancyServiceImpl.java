@@ -31,6 +31,7 @@ public class ConstancyServiceImpl implements ConstancyService {
                 .orElseThrow(() -> new RuntimeException("Estudiante no encontrado")));
         constancy.setFecha(constancyDto.getFecha());
         constancy.setEstadoConstancia(estadoConstanciaRepository.getById(constancyDto.getEstadoConstancia()));
+        constancy.setAnulado(false);
 
 
         return constancy;
@@ -46,6 +47,8 @@ public class ConstancyServiceImpl implements ConstancyService {
         constancyDto.setEstudiante(constancy.getEstudiante().getId());
         constancyDto.setFecha(constancy.getFecha());
         constancyDto.setEstadoConstancia(constancy.getEstadoConstancia().getId());
+        constancyDto.setDescripcionEstadoConstancia(constancy.getEstadoConstancia().getDescripcion());
+        constancyDto.setDescripcionTipoConstancia(constancy.getTipoConstancia().getDescripcion());
         return constancyDto;
     }
 
@@ -74,7 +77,8 @@ public class ConstancyServiceImpl implements ConstancyService {
     public void delete(Long id) {
         Constancia constancy = constancyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Constancia not found"));
-        constancyRepository.delete(constancy);
+        constancy.setAnulado(true);
+        constancyRepository.save(constancy);
     }
 
     @Override
@@ -86,7 +90,7 @@ public class ConstancyServiceImpl implements ConstancyService {
 
     @Override
     public List<ConstanciaDto> findAll() {
-        return constancyRepository.findAll()
+        return constancyRepository.findByAnuladoFalseOrAnuladoIsNull()
                 .stream()
                 .map(this::mapToDto)
                 .toList();
@@ -94,7 +98,7 @@ public class ConstancyServiceImpl implements ConstancyService {
 
     @Override
     public List<ConstanciaDto> findConstancyByStudent_Id(Long userId) {
-        return constancyRepository.findConstancyByEstudianteId(userId).stream()
+        return constancyRepository.findConstancyByEstudianteIdAndAnuladoFalseOrAnuladoNull(userId).stream()
                 .map(this::mapToDto)
                 .toList();
     }
