@@ -1,0 +1,221 @@
+@startuml
+
+' ==== CLASES ====
+
+class AccionRealizada {
+  Long id
+  String estado
+  String accionRealizada
+}
+
+class Asistencia {
+  Long id
+  String estado
+  int calificacion
+}
+
+class Certificado {
+  Long id
+  String evento
+  String informacion
+  LocalDateTime fecha
+  String estado
+  Boolean anulado
+}
+
+class Constancia {
+  Long id
+  String informacion
+  LocalDateTime fecha
+  Boolean anulado
+}
+
+class Departamento {
+  Long id
+  String nombre
+}
+
+class EstadoConstancia {
+  Long id
+  String descripcion
+}
+
+class EstadoEvento {
+  Long id
+  String descripcion
+}
+
+class EstadoJustificacion {
+  Long id
+  String descripcion
+}
+
+class EstadoReclamo {
+  Long id
+  String descripcion
+}
+
+class Estudiante {
+  int generacion
+}
+
+class Evento {
+  Long id
+  String titulo
+  LocalDateTime fechaInicio
+  LocalDateTime fechaFin
+  String ubicacion
+  Boolean anulado
+}
+
+class Itr {
+  Long id
+  String nombre
+  Boolean anulado
+}
+
+class Justificacion {
+  Long id
+  String informacion
+  LocalDateTime fecha
+  Boolean anulado
+}
+
+class Localidad {
+  Long id
+  String nombre
+}
+
+class ModalidadEvento {
+  Long id
+  String descripcion
+}
+
+class Reclamo {
+  Long id
+  String titulo
+  String descripcion
+  LocalDateTime creado
+  LocalDateTime actualizado
+  int semestre
+  LocalDate fecha
+  String docente
+  int creditos
+  Boolean anulado
+}
+
+class Rol {
+  Long id
+  String nombre
+}
+
+class TipoCertificado {
+  Long id
+  String descripcion
+}
+
+class TipoConstancia {
+  Long id
+  String descripcion
+}
+
+class TipoEvento {
+  Long id
+  String descripcion
+}
+
+class TipoReclamo {
+  Long id
+  String descripcion
+}
+
+class Tutor {
+  String area
+  String rolDocente
+}
+
+class Usuario {
+  Long id
+  String nombreUsuario
+  String contrasena
+  String primerNombre
+  String segundoNombre
+  String primerApellido
+  String segundoApellido
+  int documento
+  LocalDate fechaNacimiento
+  String correoPersonal
+  int telefono
+  String genero
+  String correoInstitucional
+  boolean activo
+  Boolean anulado
+}
+
+' ==== RELACIONES ====
+
+AccionRealizada --> Reclamo
+AccionRealizada --> Usuario : admin
+
+Asistencia --> Evento
+Asistencia --> Estudiante
+
+Certificado --> Estudiante
+Certificado --> TipoCertificado
+
+Constancia --> Evento
+Constancia --> Estudiante
+Constancia --> EstadoConstancia
+Constancia --> TipoConstancia
+
+Departamento --> Localidad
+Departamento --> Usuario
+
+EstadoConstancia --> Constancia
+EstadoEvento --> Evento
+EstadoJustificacion --> Justificacion
+EstadoReclamo --> Reclamo
+
+Estudiante -|> Usuario
+Estudiante --> Certificado
+Estudiante --> Justificacion
+Estudiante --> Reclamo
+
+Evento --> Itr
+Evento --> EstadoEvento
+Evento --> ModalidadEvento
+Evento --> TipoEvento
+Evento --> Asistencia
+Evento --> Constancia
+Evento --> Justificacion
+Evento --> Usuario : tutores
+
+Itr --> Usuario
+Itr --> Evento
+Itr --> Localidad
+
+Justificacion --> Evento
+Justificacion --> EstadoJustificacion
+Justificacion --> Estudiante
+
+Localidad --> Departamento
+Localidad --> Usuario
+Localidad --> Itr
+
+ModalidadEvento --> Evento
+
+Reclamo --> EstadoReclamo
+Reclamo --> TipoReclamo
+Reclamo --> Estudiante
+Reclamo --> AccionRealizada
+
+Rol --> Usuario
+Usuario --> Departamento
+Usuario --> Localidad
+Usuario --> Itr
+Usuario --> Rol
+
+Tutor -|> Usuario
+Tutor --> Evento
+
+@enduml
